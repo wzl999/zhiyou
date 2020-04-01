@@ -1,0 +1,49 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+    name: gym
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/gym?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
+      username: root
+      password: 123456
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      #filters: #配置多个英文逗号分隔(统计，sql注入，log4j过滤)
+      filters: stat,wall
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+  main:
+    allow-bean-definition-overriding: true
+
+#读取映射文件
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+logging:
+  level:
+    com.zhiyou100.gym.mapper: debug
+
+#---------------------七牛云服务----------------------------------
+#qiniu:
+#  #  七牛云账号对应的  AccessKey
+#  accessKey: -aqaXUyG2RXFvg3273g3aUcMrkLkqr4RQ_2nYgaU
+#  #  七牛云账号对应的  SecretKey
+#  secretKey: ppbCJwkB3pmPg47PF6UXrTctsAULiNNunv0Z2Azo
+#  #  存储空间名字
+#  bucket: wzljava10
+#  #   图片上传成功后的返回地址,我们图片一般上传完之后需要回显
+#  path: s3-cn-east-1.qiniucs.com
