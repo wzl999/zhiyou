@@ -23,4 +23,5 @@ public class gymUser {
     @TableField(value = "use_status")
     private Integer useStatus;
 
+
 }
