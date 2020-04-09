@@ -1,49 +1,39 @@
 server:
   port: 8000
-
 spring:
-  datasource:
+  application:
     name: gym
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/gym?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
-      username: root
-      password: 123456
-      initial-size: 1
-      min-idle: 1
-      max-active: 20
-      max-wait: 60000
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 'x'
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: false
-      max-pool-prepared-statement-per-connection-size: 20
-      #filters: #配置多个英文逗号分隔(统计，sql注入，log4j过滤)
-      filters: stat,wall
-      stat-view-servlet:
-        enabled: true
-        url-pattern: /druid/*
-  main:
-    allow-bean-definition-overriding: true
+  # 配置数据库
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wzlgym?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: 123456
+  # 配置Redis
+  redis:
+    host: 192.168.27.101
+    port: 6379
+    #没有密码就空着，默认没有密码
+    password:
+    #以下配置可写可不写
+    #连接超时时间（2.0中该参数的类型为Duration，这里在配置的时候需要指明单位
+    timeout: 2000ms
+    #连接池最大连接数（使用负值表示没有限制)
+    max-active: 8
+    #连接池最大阻塞等待时间（使用负值表示没有限制）
+    max-wait: -1ms
+    #连接池中的最大空闲连接
+    max-idle: 8
+    #连接池中的最小空闲连接
+    min-idle: 0
 
-#读取映射文件
-mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-logging:
-  level:
-    com.zhiyou100.gym.mapper: debug
 
-#---------------------七牛云服务----------------------------------
-#qiniu:
-#  #  七牛云账号对应的  AccessKey
-#  accessKey: -aqaXUyG2RXFvg3273g3aUcMrkLkqr4RQ_2nYgaU
-#  #  七牛云账号对应的  SecretKey
-#  secretKey: ppbCJwkB3pmPg47PF6UXrTctsAULiNNunv0Z2Azo
-#  #  存储空间名字
-#  bucket: wzljava10
-#  #   图片上传成功后的返回地址,我们图片一般上传完之后需要回显
-#  path: s3-cn-east-1.qiniucs.com
+qiniu:
+  #  七牛云账号对应的  AccessKey
+  accessKey: -aqaXUyG2RXFvg3273g3aUcMrkLkqr4RQ_2nYgaU
+  #  七牛云账号对应的  SecretKey
+  secretKey: ppbCJwkB3pmPg47PF6UXrTctsAULiNNunv0Z2Azo
+  #  存储空间名字
+  bucket: wzlgym
+  #   图片上传成功后的返回地址,我们图片一般上传完之后需要回显
+  path: q8h4k6rdj.bkt.clouddn.com
